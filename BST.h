@@ -1,25 +1,25 @@
 #ifndef BST_H
 #define BST_H
 #include <iostream>
-template <typename t , size_t N >
-struct node_t{
-    t val;
-    node *left ; 
-    node *right ;
+template<typename t >
+class node_t{
+    public : 
+        t val;
+        node_t *left ; 
+        node_t *right ;
 };
-// typedef struct node node_t;
-template <typename t , size_t N>
+template <typename t >
 class BST
 {
-    private : 
-        node_t* head ;
+    private :     
+    node_t<t>* head ;
     public :
     //Canonical Form 
     BST();
     /*
         Empty constructor that shall create head with value 0;
     */
-    BST(int val);
+    BST(t val);
     /*
         parameterized constructor that shall create head with the value val
     */
@@ -33,23 +33,28 @@ class BST
     */
 
     //Interface - DS
-    void insert_node(int key);
+    void insert_node(t key);
     /*
         Insert a node to the left or right of the closest node according to the key ; 
     */
-    int delete_node(int key);
+    int delete_node(t key);
+    int delete_node__(t key  ,node_t<t>*pntr_head);
+    node_t<t>* succession__( node_t<t>*pntr_head);
     /*
         delete the node and put the closest successor to that value ! 
         If node not found return -1;
+
+        Succesion will be choosing the next largest value to the key 
+        value that is being deleted 
     */
-    node_t* search_node(int key);
+    node_t<t>* search_node(t key);
     /*
         search the node to find the key , return NULL if the value isn't found 
     */
-    node_t* floor(int key);
+    node_t<t>* floor(t key);
     /*
         search and find the closest node to the key given 
     */
 };
-
+#include "BST.hxx"
 #endif
